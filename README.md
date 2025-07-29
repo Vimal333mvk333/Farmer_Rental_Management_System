@@ -1,1 +1,0 @@
-# Farmer_Rental_Management_System
