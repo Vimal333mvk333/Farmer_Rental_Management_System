@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>Farmer Rental Management</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Farmer Rental Management</h1>
+
+        <form method="POST" action="/add_farmer" class="form-card">
+            <input type="text" name="name" placeholder="Farmer Name" required>
+            <input type="text" name="contact" placeholder="Contact" required>
+            <input type="number" step="0.01" name="total_rent" placeholder="Total Rent" required>
+            <input type="number" step="0.01" name="balance" placeholder="Balance" required>
+            <button type="submit">Add Farmer</button>
+        </form>
+
+        <form method="POST" action="/delete_farmer" class="form-card delete-card">
+            <input type="text" name="name" placeholder="Farmer Name" required>
+            <input type="text" name="contact" placeholder="Contact" required>
+            <button type="submit" class="delete-btn">Delete Farmer</button>
+        </form>
+
+        <h2>Farmers List</h2>
+        <table>
+            <tr>
+                <th>Name</th><th>Contact</th><th>Total Rent</th><th>Balance</th><th>Actions</th>
+            </tr>
+            {% for farmer in farmers %}
+            <tr>
+                <td>{{ farmer.name }}</td>
+                <td>{{ farmer.contact }}</td>
+                <td>₹{{ farmer.total_rent }}</td>
+                <td>₹{{ farmer.balance }}</td>
+                <td><a href="/transactions/{{ farmer.farmer_id }}">View Transactions</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</body>
+</html>
